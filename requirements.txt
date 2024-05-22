@@ -1,0 +1,5 @@
+cryptography
+hashlib
+pillow
+pandas
+PyPDF2
