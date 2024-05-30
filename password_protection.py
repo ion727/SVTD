@@ -2,9 +2,16 @@ from cryptography.fernet import Fernet
 import os
 import hashlib
 
+def commands(cmd):
+    options, nt_commands, lx_commands = ("clear","rename","rmdir"), ("cls","rename","rmdir /s /q"), ("clear", "mv","rm -Rf")
+    return nt_commands[options.index(cmd)] if os.name == "nt" else lx_commands[options.index(cmd)]
+
+def fixpath(file_path):
+    return file_path.replace("/","\\") if os.name == "nt" else file_path.replace("\\","/")
+
 wrong = False
 key = input("Enter password: ")
-for i in range(4096):
+for i in range(1000):
     key = hashlib.sha256(key.encode("utf-8"),usedforsecurity=True).hexdigest()
 
 key = Fernet(key[:43].encode("utf-8")+b"=")
@@ -35,6 +42,7 @@ for file in files:
     if not wrong:
         with open(file,"wb") as e:
             e.write(decrypted_contents)
+
 if not wrong:
     exec(open("file_config.txt").read())
     os.remove("file_config.txt") # remove this line to make changes to file_config.txt
