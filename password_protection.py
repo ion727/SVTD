@@ -11,7 +11,7 @@ def fixpath(file_path):
 
 wrong = False
 key = input("Enter password: ")
-for i in range(1000):
+for i in range(4096):
     key = hashlib.sha256(key.encode("utf-8"),usedforsecurity=True).hexdigest()
 
 key = Fernet(key[:43].encode("utf-8")+b"=")
