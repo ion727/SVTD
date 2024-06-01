@@ -1,7 +1,7 @@
 # SVTD
 ## info
 Password-protected SVTD program.
-Currently only functional on Windows OS.
+Should function on Windows and MacOS.
 ## Authors
 Authors: `ion727` & `sideswipe890`
 ## Unlocking
