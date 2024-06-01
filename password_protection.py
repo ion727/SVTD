@@ -19,15 +19,18 @@ key = Fernet(key[:43].encode("utf-8")+b"=")
 def list_files(directory_path):
     files = []
     for file_name in os.listdir(directory_path):
-        file_path = os.path.join(directory_path, file_name)
-        if os.path.isfile(file_path):
-            files.append(file_path)
-        elif os.path.isdir(file_path):
-            files.extend(list_files(file_path))
+        file_path = os.path.join(directory_path, file_name) 
+        if file_name != ".git":
+            if os.path.isfile(file_path):
+                files.append(file_path)
+            elif os.path.isdir(file_path):
+                files.extend(list_files(file_path))
     return files
 
-files = list_files(fixpath(".\\"))
-files.remove(fixpath(".\\password_protection.py"))
+files = list_files(".\\")
+files.remove(".\\password_protection.py")
+files.remove(".\\README.md")
+files.remove(".\\requirements.txt")
 
 for file in files:
     with open(file,"rb") as e:
