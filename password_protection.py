@@ -28,10 +28,10 @@ def list_files(directory_path):
                 files.extend(list_files(file_path))
     return files
 
-files = list_files(".\\")
-files.remove(".\\password_protection.py")
-files.remove(".\\README.md")
-files.remove(".\\requirements.txt")
+files = list_files(fixpath(".\\"))
+files.remove(fixpath(".\\password_protection.py"))
+files.remove(fixpath(".\\README.md"))
+files.remove(fixpath(".\\requirements.txt"))
 
 for file in files:
     with open(file,"rb") as e:
