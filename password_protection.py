@@ -36,7 +36,6 @@ files.remove(fixpath(".\\README.md"))
 files.remove(fixpath(".\\requirements.txt"))
 
 for file in files:
-    print(file)
     with open(file,"rb") as e:
         file_contents = e.read()
         try:
