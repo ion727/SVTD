@@ -1,5 +1,6 @@
-from cryptography.fernet import Fernet
 import os
+os.system("pip3 install -r requirements.txt > NUL")
+from cryptography.fernet import Fernet
 import hashlib
 
 def commands(cmd):
@@ -9,11 +10,12 @@ def commands(cmd):
 def fixpath(file_path):
     return file_path.replace("/","\\") if os.name == "nt" else file_path.replace("\\","/")
 
+
 os.system(f'{commands("rmdir")} ' + fixpath(".\\.git"))
 wrong = False
 key = input("Enter password: ")
 for i in range(4096):
-    key = hashlib.sha256(key.encode("utf-8"),usedforsecurity=True).hexdigest()
+    key = hashlib.sha256(key.encode("utf-8")).hexdigest()
 
 key = Fernet(key[:43].encode("utf-8")+b"=")
 
@@ -34,6 +36,7 @@ files.remove(fixpath(".\\README.md"))
 files.remove(fixpath(".\\requirements.txt"))
 
 for file in files:
+    print(file)
     with open(file,"rb") as e:
         file_contents = e.read()
         try:
