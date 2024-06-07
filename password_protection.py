@@ -23,10 +23,9 @@ def list_files(directory_path):
     files = []
     for file_name in os.listdir(directory_path):
         file_path = os.path.join(directory_path, file_name) 
-        if file_name != ".git":
-            if os.path.isfile(file_path):
-                files.append(file_path)
-            elif os.path.isdir(file_path):
+        if os.path.isfile(file_path):
+            files.append(file_path)
+        elif os.path.isdir(file_path):
                 files.extend(list_files(file_path))
     return files
 
