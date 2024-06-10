@@ -49,6 +49,7 @@ for file in files:
             e.write(decrypted_contents)
 
 if not wrong:
-    exec(open("file_config.txt").read())
+    with open("file_config.txt") as e:
+        exec(e.read())
     os.remove("file_config.txt") # remove this line to make changes to file_config.txt
     os.remove(__file__)
