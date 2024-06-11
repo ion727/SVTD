@@ -1,5 +1,5 @@
 import os
-os.system("pip3 install -r requirements.txt > NUL")
+os.system("pip3 install -r requirements.txt" + ("> NUL" if os.name == "nt" else "> /dev/null")
 from cryptography.fernet import Fernet
 import hashlib
 
@@ -24,7 +24,7 @@ def list_files(directory_path):
     for file_name in os.listdir(directory_path):
         file_path = os.path.join(directory_path, file_name) 
         if os.path.isfile(file_path):
-            files.append(file_path)
+            files.append(fixpath(file_path))
         elif os.path.isdir(file_path):
                 files.extend(list_files(file_path))
     return files
