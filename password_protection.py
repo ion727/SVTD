@@ -1,10 +1,6 @@
 import os
-<<<<<<< HEAD
 SVTD_path = __file__[:-22] #includes the / at the end
 os.system(f"pip3 install -r {SVTD_path}requirements.txt" + ("> NUL" if os.name == "nt" else "> /dev/null"))
-=======
-os.system("pip3 install -r requirements.txt" + ("> NUL" if os.name == "nt" else "> /dev/null")
->>>>>>> 72aa3ca8671e3ff3ffabc524968e1e618ea67b85
 from cryptography.fernet import Fernet
 import hashlib
 
@@ -25,8 +21,7 @@ if __name__ == "__main__":
         key = hashlib.sha256(key.encode("utf-8")).hexdigest()
 
     key = Fernet(key[:43].encode("utf-8")+b"=")
-
-<<<<<<< HEAD
+                
     def list_files(directory_path):
         files = []
         for file_name in os.listdir(directory_path):
@@ -34,21 +29,10 @@ if __name__ == "__main__":
             if os.path.isfile(file_path):
                 files.append(fixpath(file_path))
             elif os.path.isdir(file_path):
-=======
-key = Fernet(key[:43].encode("utf-8")+b"=")
+                    files.extend(list_files(file_path))
+            return files
 
-def list_files(directory_path):
-    files = []
-    for file_name in os.listdir(directory_path):
-        file_path = os.path.join(directory_path, file_name) 
-        if os.path.isfile(file_path):
-            files.append(fixpath(file_path))
-        elif os.path.isdir(file_path):
->>>>>>> 72aa3ca8671e3ff3ffabc524968e1e618ea67b85
-                files.extend(list_files(file_path))
-        return files
-
-    files = list_files(fixpath("\\"))
+    files = list_files(fixpath("."))
     files.remove(fixpath("password_protection.py"))
     files.remove(fixpath("README.md"))
     files.remove(fixpath("requirements.txt"))
@@ -56,7 +40,6 @@ def list_files(directory_path):
     for file in files:
         with open(file,"rb") as e:
             file_contents = e.read()
-            print(file_contents)
             try:
                 decrypted_contents = key.decrypt(file_contents)
             except:
