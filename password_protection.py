@@ -30,7 +30,7 @@ if __name__ == "__main__":
                 files.append(fixpath(file_path))
             elif os.path.isdir(file_path):
                     files.extend(list_files(file_path))
-            return files
+        return files
 
     files = list_files(fixpath("."))
     files.remove(fixpath("password_protection.py"))
