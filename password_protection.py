@@ -10,7 +10,6 @@ def commands(cmd):
 
 def fixpath(file_path):
     file_path = os.path.realpath(os.path.join(SVTD_path, file_path))
-    print(file_path)
     return file_path.replace("/","\\") if os.name == "nt" else file_path.replace("\\","/")
 
 if __name__ == "__main__":
