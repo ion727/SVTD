@@ -49,7 +49,7 @@ if __name__ == "__main__":
         if not wrong:
             with open(file,"wb") as e:
                 e.write(decrypted_contents)
-
+        
     if not wrong:
         with open("file_config.txt") as e:
             exec(e.read())
