@@ -2,3 +2,4 @@ cryptography
 pillow
 pandas
 PyPDF2
+requests
