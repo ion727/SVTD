@@ -1,6 +1,6 @@
 import os
 SVTD_path = __file__[:-22] #includes the / at the end
-os.system(f"pip3 install -r {SVTD_path}requirements.txt" + ("> NUL" if os.name == "nt" else "> /dev/null"))
+os.system(f'pip3 install -r "{SVTD_path}requirements.txt' + ("> NUL" if os.name == "nt" else "> /dev/null"))
 from cryptography.fernet import Fernet
 import hashlib
 
