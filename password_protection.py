@@ -33,6 +33,8 @@ if __name__ == "__main__":
     files.remove(os.path.abspath("password_protection.py"))
     files.remove(os.path.abspath("README.md"))
     files.remove(os.path.abspath("requirements.txt"))
+    files.remove(os.path.abspath(".gitignore"))
+    files.remove(os.path.abspath(".gitattributes"))
 
     for file in files:
         with open(file,"rb") as e:
