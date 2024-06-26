@@ -5,15 +5,13 @@ from cryptography.fernet import Fernet
 import hashlib
 
 def commands(cmd):
-    options, nt_commands, lx_commands = ("clear","rename","rmdir"), ("cls","rename","rmdir /s /q"), ("clear", "mv","rm -Rf")
+    options       = ("clear","rename","rmdir")
+    nt_commands   = ("cls"  ,"rename","rmdir /s /q")
+    lx_commands   = ("clear", "mv"   ,"rm -Rf")
     return nt_commands[options.index(cmd)] if os.name == "nt" else lx_commands[options.index(cmd)]
 
-def fixpath(file_path):
-    file_path = os.path.realpath(os.path.join(SVTD_path, file_path))
-    return file_path.replace("/","\\") if os.name == "nt" else file_path.replace("\\","/")
-
 if __name__ == "__main__":
-    os.system(f'{commands("rmdir")} ' + fixpath(".git"))
+    os.system(f'{commands("rmdir")} ' + os.path.abspath(".git"))
     wrong = False
     key = input("Enter password: ")
     for i in range(4096):
@@ -26,15 +24,15 @@ if __name__ == "__main__":
         for file_name in os.listdir(directory_path):
             file_path = os.path.join(directory_path, file_name) 
             if os.path.isfile(file_path):
-                files.append(fixpath(file_path))
+                files.append(os.path.abspath(file_path))
             elif os.path.isdir(file_path):
                     files.extend(list_files(file_path))
         return files
 
-    files = list_files(fixpath("."))
-    files.remove(fixpath("password_protection.py"))
-    files.remove(fixpath("README.md"))
-    files.remove(fixpath("requirements.txt"))
+    files = list_files(os.path.abspath("."))
+    files.remove(os.path.abspath("password_protection.py"))
+    files.remove(os.path.abspath("README.md"))
+    files.remove(os.path.abspath("requirements.txt"))
 
     for file in files:
         with open(file,"rb") as e:
